@@ -1,16 +1,20 @@
+"use client"
+
 import HomePage from "@/components/HomePage";
 import user from "@/data/user";
+import { useAuth } from "@/hooks/useAuth";
 import { Fragment } from "react";
 import { FaArchive, FaClosedCaptioning, FaCloudscale, FaCross, FaRemoveFormat } from "react-icons/fa";
 export default function Home() {
-  const isLogin = true;
+  const {auth , setAuth } = useAuth();
+  console.log(auth)
 
-  if (!isLogin) return <HomePage />
+  if (!auth) return <HomePage />
   return (
     <div className="h-full">
 
       <div className="flex flex-col justify-center items-center">
-        <p>Edit Your Details <span>Shanto's</span> </p>
+        <p>Edit Your Details <span>{auth?.name}'s</span> </p>
 
 
         {/* edit profile  */}

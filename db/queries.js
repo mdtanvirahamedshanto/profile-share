@@ -1,50 +1,35 @@
-import { UserModel } from '@/models/User.js'
-import bcrypt from 'bcryptjs'
-import connectMongo from './conectMongo.js'
+import { UserModel } from '@/models/user.model.js'
+import { dbConnect } from './conectMongo';
 
-// register a user
-const createUser = async (user) => {
+
+
+export async function createUser(user) {
   try {
-    await connectMongo()
-
-    const existingUser = await UserModel.findOne({ email: user.email })
-    if (existingUser) {
-      return {
-        msg: 'user already exists',
-      }
+    await dbConnect();
+    const userData = {
+      name:user?.name,
+      username:user?.name?.split(" ").join("").toLocaleLowerCase(),
+      email: user?.email,
+      password: user?.password,
+      bio:"",
+      contact:{},
+      socail:{},
+      service:[],
     }
-
-    const salt = bcrypt.genSaltSync(10)
-    const hashedPassword = bcrypt.hashSync(user.password, salt)
-    const data = await UserModel.create({
-      ...user,
-      firstName: user.fname,
-      lastName: user.lname,
-      password: hashedPassword,
-      favorites: [],
-    })
-    return data
+    console.log(userData);
+    await UserModel.create(userData);
   } catch (error) {
-    console.error('Error creating user:', error)
-    throw error
+    console.log("Error: ", error);
   }
 }
 
-// get a user
-const findUser = async (credentials) => {
-  try {
-    await connectMongo()
+export async function findUserByCredentials(userData) {
+  await dbConnect();
+  const user = await UserModel.findOne(userData).lean();
 
-    const user = await UserModel.findOne({ email: credentials.email })
-    return user
-  } catch (error) {
-    console.error('Error finding user:', error)
-    throw error
+  if (!user) {
+    throw new Error
   }
-}
-
-
-export {
-  createUser,
-  findUser,
+  return user
+  
 }

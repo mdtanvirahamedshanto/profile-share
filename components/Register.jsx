@@ -1,66 +1,60 @@
 "use client";
+import { registerUser } from "@/actions";
 // import { registerUser } from "@/action";
 import Link from "next/link";
 import { useState } from "react";
 
 const SingUp = () => {
   const [error, setError] = useState("");
-  const [fromData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+  const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
   const handleFrom = (event) => {
     event.preventDefault();
-    setFormData({ ...fromData, [event.target.name]: event.target.value });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
     if (
-      fromData.firstName.length === 0 ||
-      fromData.lastName.length === 0 ||
-      fromData.email.length === 0 ||
-      fromData.password.length === 0
+      
+      formData.name.length === 0 ||
+      formData.email.length === 0 ||
+      formData.password.length === 0
     ) {
       setError("Please provide all the required fields");
     } else {
       setError("");
     }
   };
+  // console.log(formData) 
 
-  const registerUser= ()=>{}
+
+
 
   return (
-    <div className="h-screen grid place-items-center">
+    <div className="h-screen grid  place-items-center">
       <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md">
         <h4 className="font-bold text-2xl">Sign Up</h4>
 
-        <form className="login-form" action={registerUser}>
-          <div>
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              onChange={handleFrom}
-            />
-          </div>
+        <form className="login-form " action={registerUser}>
+          
 
           <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
+            <label htmlFor="name">Name</label>
+            <input className="text-gray-900 font-medium"
               type="text"
-              name="lastName"
-              id="lastName"
+              name="name"
+              id="name"
               onChange={handleFrom}
             />
           </div>
           <div>
             <label htmlFor="email">Email Address</label>
-            <input type="email" name="email" id="email" onChange={handleFrom} />
+            <input className="text-gray-900 font-medium" type="email" name="email" id="email" onChange={handleFrom} />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input
+            <input className="text-gray-900 font-medium"
               type="password"
               name="password"
               id="password"
@@ -72,7 +66,7 @@ const SingUp = () => {
             <button
               type="submit"
               disabled
-              className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
+              className="bg-gray-400 py-3 rounded-md text-white w-full mt-4"
             >
               Create Account
             </button>

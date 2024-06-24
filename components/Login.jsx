@@ -1,7 +1,7 @@
 "use client";
 
-
-
+import { performLogin } from "@/actions";
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,6 +9,13 @@ import { useState } from "react";
 const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [email , setEmail] = useState("");
+  const [password, setPassword] = useState("");
+const { setAuth} = useAuth();
+  const userData = {
+    email,
+    password
+  }
 
 
   const router = useRouter();
@@ -17,10 +24,8 @@ const Login = () => {
     event.preventDefault();
     try {
       setLoading(true);
-      const formData = new FormData(event.currentTarget);
-
-      const found = await performLogin(formData);
-
+      const found = await performLogin(userData);
+console.log(found);
       if (found) {
         setAuth(found);
         router.push("/");
@@ -42,19 +47,19 @@ const Login = () => {
         <form className="login-form" onSubmit={onSubmit}>
           <div>
             <label htmlFor="email">Email Address</label>
-            <input type="email" name="email" id="email" />
+            <input onChange={(e)=> setEmail(e.target.value)} value={email} className="text-gray-800 font-medium" type="email" name="email" id="email" />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" />
+            <input onChange={(e)=> setPassword(e.target.value)} value={password} className="text-gray-800 font-medium" type="password" name="password" id="password" />
           </div>
 
           {loading ? (
             <button
               type="submit"
               disabled
-              className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
+              className="bg-gray-400 py-3 rounded-md text-white w-full mt-4"
             >
               Loading...
             </button>

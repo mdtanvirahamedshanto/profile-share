@@ -1,11 +1,7 @@
 import { model, models, Schema } from 'mongoose'
 
 const schema = new Schema({
-  firstName: {
-    required: true,
-    type: String,
-  },
-  lastName: {
+  name: {
     required: true,
     type: String,
   },
