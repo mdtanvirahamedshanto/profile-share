@@ -18,6 +18,7 @@ const schema = new Schema({
   password: {
     required: true,
     type: String,
+    select: false
   },
   bio: {
     type: String

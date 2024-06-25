@@ -1,21 +1,22 @@
 'use client'
-import React, { useState } from 'react'
+import { addService, findUser } from '@/actions';
+import { useAuth } from '@/hooks/useAuth';
+import React, { useEffect, useState } from 'react'
 import { FaCheck, FaEdit } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const AddService = () => {
-    
+    const {auth} = useAuth()
     const [service, setService] = useState('')
     const [editMode, setEditMode] = useState(false)
-  
+    const [user, setUser] = useState('')
+const id = auth?._id
     const addedService = async () => {
-      if (service.length < 7) {
-        toast.error("service number must be at least 7 characters");
-        return;
-      }
       try {
-        await updateservice({ email: user.email, service });
+        await addService(id, service );
         setEditMode(false);
-        toast.success("service number updated successfully");
+        setService("")
+        toast.success("service added successfully");
       } catch (error) {
         console.log(error);
       }
@@ -25,6 +26,8 @@ const AddService = () => {
       
       setEditMode(true);
     };
+
+
   return (
     <div className='flex items-center justify-center w-full'>
          <div className="">
@@ -35,7 +38,7 @@ const AddService = () => {
         ) : (
             <div className='flex items-center'>
           Add New: <textarea
-            className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-gray-600 lg:text-lg rounded-md'
+            className='p-2 mx-2 text-white className="leading-[188%] bg-[#167770]  lg:text-lg rounded-md'
             value={service}
             rows={1}
             cols={18}

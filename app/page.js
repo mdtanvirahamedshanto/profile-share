@@ -1,5 +1,6 @@
 "use client"
 
+import { findUser } from "@/actions";
 import HomePage from "@/components/HomePage";
 import AddService from "@/components/update/AddService";
 import Bio from "@/components/update/Bio";
@@ -8,15 +9,26 @@ import UpdateSocial from "@/components/update/UpdateSocial";
 import UserName from "@/components/update/UserName";
 import user from "@/data/user";
 import { useAuth } from "@/hooks/useAuth";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FaArchive, FaCheck, FaClosedCaptioning, FaCloudscale, FaCross, FaEdit, FaRemoveFormat } from "react-icons/fa";
 export default function Home() {
   const {auth , setAuth } = useAuth();
+  const [user, setUser] = useState('')
+
   console.log(auth)
 
+  
+  
+  
+  useEffect(() => {
+    const data = async()=>{
+      const userData = await findUser(auth?.username)
+      setUser(userData)
+    }
+    data();
+  }, [])
+  
   if (!auth) return <HomePage />
-
-
   return (
 
     <div className="h-full">
@@ -56,7 +68,7 @@ export default function Home() {
           <div>
             <ul className="flex flex-col">
               {
-                auth?.service?.map((item, i) => (<div className="flex flex-row gap-3 items-center " > <li className='text-2xl text-blue-400  font-medium' key={item} >{i + 1}. {item}
+                user?.service?.map((item, i) => (<div className="flex flex-row my-2 gap-3 items-center " > <li className='text-2xl text-blue-400  font-medium' key={item} >{i + 1}. {item}
                 </li>
                   <button className="flex items-center gap-1 text-black font-semibold cursor-pointer border bg-primary rounded-md p-1">
                     <FaArchive className="text-red-600" />

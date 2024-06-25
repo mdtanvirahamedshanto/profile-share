@@ -33,3 +33,51 @@ export async function findUserByCredentials(userData) {
   return user
   
 }
+
+export async function findUserByUsername(username){
+  await dbConnect();
+  const user = await UserModel.findOne({username: username}).lean();
+  return user
+}
+
+export async function updateContactById(email,contactData){
+  await dbConnect();
+  const data = await UserModel.findOneAndUpdate(
+    { email },
+    {
+      contact: contactData,
+    },
+    { new: true }
+  );
+  // const data = JSON.parse(JSON.stringify(sampleData))
+  return JSON.parse(JSON.stringify(data))
+}
+
+export async function updateSocialById(email,contactData){
+  await dbConnect();
+  const data = await UserModel.findOneAndUpdate(
+    { email },
+    {
+      social: contactData,
+    },
+    { new: true }
+  );
+  return JSON.parse(JSON.stringify(data))
+}
+
+export async function addServiceById(id,service){
+  await dbConnect();
+  const user = await UserModel.findOne({_id: id});
+  console.log(user)
+  if (user) {
+    const foundService = user?.service?.find((ser) => ser === service);
+    console.log("first0", foundService)
+    if (!foundService) {
+      user.service.push(service);
+    } else {
+      return new Error
+    }
+  }
+  user.save();
+  return JSON.parse(JSON.stringify(user))
+}

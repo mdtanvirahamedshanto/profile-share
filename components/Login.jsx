@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import LoadingIcon from "./LoadingIcon";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -59,9 +60,9 @@ console.log(found);
             <button
               type="submit"
               disabled
-              className="bg-gray-400 py-3 rounded-md text-white w-full mt-4"
+              className="bg-gray-400 flex justify-center py-3 rounded-md text-white w-full mt-4"
             >
-              Loading...
+             <LoadingIcon />
             </button>
           ) : (
             <button

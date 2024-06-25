@@ -1,9 +1,10 @@
 "use client"
 
+import { findUser } from '@/actions';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Navbar = () => {
   const {auth, setAuth }= useAuth();
@@ -13,7 +14,6 @@ const Navbar = () => {
     setAuth(null);
     router.push("/login")
   }
- 
   return (
     <div className='flex justify-between w-full pt-5 pb-5 items-center'>
         <Link href={"/"} className='flex w-full justify-center font-bold text-purple-600 text-xl sm:text-2xl'>Share Profile.</Link>
