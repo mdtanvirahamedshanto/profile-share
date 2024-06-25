@@ -38,7 +38,7 @@ export default function Home() {
     }
   }
   const username = user?.username
-  const shareLink = `lkjwe/${username}`
+  const shareLink = `https://profileshare.vercel.app/link/${username}`
   if (!auth) return <HomePage />
   return (
 
