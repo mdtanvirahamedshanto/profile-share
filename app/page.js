@@ -51,7 +51,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <p>Edit Your Details <span>{auth?.name}'s</span> </p>
+        <p>Edit Your Details <span>{auth?.name}</span> </p>
 
 
         {/* edit profile  */}
@@ -85,7 +85,7 @@ export default function Home() {
           <div>
             <ul className="flex flex-col">
               {
-                user?.service?.map((item, i) => (<div className="flex flex-row my-2 gap-3 items-center " > <li className='text-2xl text-blue-400  font-medium' key={item} >{i + 1}. {item}
+                user?.service?.map((item, i) => (<div className="flex flex-row my-2 gap-3 items-center " key={i} > <li className='text-2xl text-blue-400  font-medium'  >{i + 1}. {item}
                 </li>
                   <button onClick={() => handleDelete(item)} className="flex items-center gap-1 text-black font-semibold cursor-pointer border bg-primary rounded-md p-1">
                     <FaArchive className="text-red-600" />

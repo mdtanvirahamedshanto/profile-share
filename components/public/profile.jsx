@@ -14,7 +14,6 @@ const Profile = ({username}) => {
 
     const router = useRouter();
 
-    if(!username) return null
     useEffect(() => {
         try {
             setLoading(true)
@@ -34,7 +33,7 @@ const Profile = ({username}) => {
             console.log(error)
         }
        
-      }, [])
+      }, [username])
     
       if(loading) return <LoadingIcon />
   return (
