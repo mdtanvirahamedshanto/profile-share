@@ -1,30 +1,29 @@
 "use client"
+import { updateUsername } from '@/actions'
 import { useAuth } from '@/hooks/useAuth'
 import React, { useState } from 'react'
 import { FaCheck, FaEdit } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 
 const UserName = () => {
     const {auth} = useAuth();
     const [username, setUsername] = useState(auth?.username)
     const [editMode, setEditMode] = useState(false)
-  
-    const updateContact = async () => {
-      if (shippingAddress.length < 7) {
-        toast.error("ShippingAddress number must be at least 7 characters");
-        return;
-      }
+  const email = auth?.email
+    const updateNewUsername = async () => {
+     
       try {
-        await updateShippingAddress({ email: user.email, shippingAddress });
+        await updateUsername(email, username );
         setEditMode(false);
-        toast.success("ShippingAddress number updated successfully");
+        toast.success("username updated successfully");
       } catch (error) {
         console.log(error);
       }
     };
   
     const handleEdit = () => {
-      setBio(auth?.bio);
+      setUsername(auth?.username);
       setEditMode(true);
     };
   return (
@@ -37,7 +36,7 @@ const UserName = () => {
           </p>
         ) : (
           <textarea
-            className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-gray-600 lg:text-lg rounded-md'
+            className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-gray-100 lg:text-lg rounded-md'
             value={username}
             rows={1}
             cols={18}
@@ -57,7 +56,7 @@ const UserName = () => {
       ) : (
         <button
           className="flex-center h-7 w-7 rounded-full"
-          onClick={updateContact}
+          onClick={updateNewUsername}
         >
           <FaCheck />
         </button>

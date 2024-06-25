@@ -1,11 +1,12 @@
-import Link from 'next/link'
 import React from 'react'
-import user from '@/data/user'
-import {FaFacebook, FaInstagram, FaTelegram, FaTwitter, FaYoutube} from "react-icons/fa"
 import Profile from '@/components/public/profile'
 import Service from '@/components/public/Service'
 import Contact from '@/components/public/Contact'
 import Social from '@/components/public/Social'
+
+export const metadata ={
+    title: `this is profile share profile`
+}
 
 const page = ({ params: { username } }) => {
     return (

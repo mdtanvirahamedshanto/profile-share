@@ -2,19 +2,29 @@
 import { findUser } from '@/actions'
 import Loading from '@/app/Loading'
 import React, { useEffect, useState } from 'react'
-import Loader from '../Loader'
 import LoadingIcon from '../LoadingIcon'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@/hooks/useUser'
+import { toast } from 'react-toastify'
 
 
 const Profile = ({username}) => {
-    const [user, setUser] = useState('')
+    const {user, setUser} = useUser()
     const [loading, setLoading] = useState(false)
+
+    const router = useRouter();
+
+    if(!username) return null
     useEffect(() => {
         try {
             setLoading(true)
             const find = async()=>{
                 const user = await findUser(username)
                 setUser(user)
+                if(!user){
+                  toast.error("User Not-Found! ")
+                  router.push("/")
+                }
                 setLoading(false)
               }
             
@@ -25,6 +35,7 @@ const Profile = ({username}) => {
         }
        
       }, [])
+    
       if(loading) return <LoadingIcon />
   return (
     <div>

@@ -6,13 +6,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LoadingIcon from "./LoadingIcon";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [email , setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const { setAuth} = useAuth();
+  const { setAuth } = useAuth();
   const userData = {
     email,
     password
@@ -26,13 +27,15 @@ const { setAuth} = useAuth();
     try {
       setLoading(true);
       const found = await performLogin(userData);
-console.log(found);
+      // console.log(found);
       if (found) {
         setAuth(found);
+        toast.success("Login Succesfully! ")
         router.push("/");
         setLoading(false);
       } else {
         setLoading(false);
+        toast.error("Something Went Wrong! ")
         setError("Please provide a valid login credential");
       }
     } catch (err) {
@@ -48,12 +51,12 @@ console.log(found);
         <form className="login-form" onSubmit={onSubmit}>
           <div>
             <label htmlFor="email">Email Address</label>
-            <input onChange={(e)=> setEmail(e.target.value)} value={email} className="text-gray-800 font-medium" type="email" name="email" id="email" />
+            <input onChange={(e) => setEmail(e.target.value)} value={email} className="text-gray-800 font-medium" type="email" name="email" id="email" />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input onChange={(e)=> setPassword(e.target.value)} value={password} className="text-gray-800 font-medium" type="password" name="password" id="password" />
+            <input onChange={(e) => setPassword(e.target.value)} value={password} className="text-gray-800 font-medium" type="password" name="password" id="password" />
           </div>
 
           {loading ? (
@@ -62,7 +65,7 @@ console.log(found);
               disabled
               className="bg-gray-400 flex justify-center py-3 rounded-md text-white w-full mt-4"
             >
-             <LoadingIcon />
+              <LoadingIcon />
             </button>
           ) : (
             <button

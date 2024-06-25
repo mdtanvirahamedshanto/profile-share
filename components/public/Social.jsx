@@ -1,31 +1,12 @@
 "use client"
-import { findUser } from '@/actions'
 
-import React, { useEffect, useState } from 'react'
-import LoadingIcon from '../LoadingIcon'
+import React from 'react'
 import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaTelegram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { useUser } from '@/hooks/useUser'
 
-const Social = ({ username }) => {
-    const [user, setUser] = useState('')
-    const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        try {
-            setLoading(true)
-            const find = async () => {
-                const user = await findUser(username)
-                setUser(user)
-                setLoading(false)
-            }
-
-            find();
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-        }
-
-    }, [])
-    if (loading) return <LoadingIcon />
+const Social = () => {
+  const {user} = useUser()
   return (
     <div>
         <div className='flex flex-col mb-5  items-center'>

@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 
 const UpdateSocial = () => {
   const {auth} = useAuth();
-  const [facebook, setFacebook] = useState(auth?.contact?.facebook || '')
-  const [instagram, setInstagram] = useState(auth?.contact?.instagram || '')
-  const [telegram, setTelegram] = useState(auth?.contact?.telegram || '')
-  const [twitter, setTwitter] = useState(auth?.contact?.twitter || '')
+  const [facebook, setFacebook] = useState(auth?.social?.facebook || '')
+  const [instagram, setInstagram] = useState(auth?.social?.instagram || '')
+  const [telegram, setTelegram] = useState(auth?.social?.telegram || '')
+  const [twitter, setTwitter] = useState(auth?.social?.twitter || '')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   let socialData = {
@@ -45,10 +45,10 @@ console.log(data)
     <div className="flex flex-col items-center gap-1 justify-center">
     <div className="mt-3">Edit Social: </div>
     <form onSubmit={handleUpdateSocial} className="flex flex-col  gap-1">
-      <div> <label className="text-green-500 text-xl font-medium">Facebook: </label> <input onChange={(e)=> setFacebook(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " placeholder="Enter Your username" ></input> </div>
-      <div> <label className="text-green-500 text-xl font-medium">Instagram: </label> <input onChange={(e)=> setInstagram(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " placeholder="Enter Your username" ></input> </div>
-      <div> <label className="text-green-500 text-xl font-medium">Talegram: </label> <input onChange={(e)=> setTelegram(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " placeholder="Enter Your username" ></input> </div>
-      <div> <label className="text-green-500 text-xl font-medium">Twitter: </label> <input onChange={(e)=> setTwitter(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " placeholder="Enter Your username" ></input> </div>
+      <div> <label className="text-green-500 text-xl font-medium">Facebook: </label> <input onChange={(e)=> setFacebook(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " value={facebook} placeholder="Enter Your username" ></input> </div>
+      <div> <label className="text-green-500 text-xl font-medium">Instagram: </label> <input onChange={(e)=> setInstagram(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " value={instagram} placeholder="Enter Your username" ></input> </div>
+      <div> <label className="text-green-500 text-xl font-medium">Talegram: </label> <input onChange={(e)=> setTelegram(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " value={telegram} placeholder="Enter Your username" ></input> </div>
+      <div> <label className="text-green-500 text-xl font-medium">Twitter: </label> <input onChange={(e)=> setTwitter(e.target.value)} className="w-52 bg-[#167770] border border-purple-500  hover:border hover:border-pink-500 " value={twitter} placeholder="Enter Your username" ></input> </div>
 
       <div className='flex cursor-pointer items-center w-full justify-center'>
 

@@ -1,23 +1,22 @@
 "use client"
+import { updateBio, updateNewBio } from '@/actions'
 import { useAuth } from '@/hooks/useAuth'
 import React, { useState } from 'react'
 import { FaCheck, FaEdit } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 
 const Bio = () => {
     const {auth} = useAuth();
     const [bio, setBio] = useState(auth?.bio)
     const [editMode, setEditMode] = useState(false)
-  
-    const updateContact = async () => {
-      if (shippingAddress.length < 7) {
-        toast.error("ShippingAddress number must be at least 7 characters");
-        return;
-      }
+  const email = auth?.email
+    const updateNewBio = async (event) => {
+      event.preventDefault();
       try {
-        await updateShippingAddress({ email: user.email, shippingAddress });
+        await updateBio(email, bio );
         setEditMode(false);
-        toast.success("ShippingAddress number updated successfully");
+        toast.success("Bio updated successfully");
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +36,7 @@ const Bio = () => {
           </p>
         ) : (
           <textarea
-            className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-gray-600 lg:text-lg rounded-md'
+            className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-white lg:text-lg rounded-md'
             value={bio}
             rows={1}
             cols={18}
@@ -57,7 +56,7 @@ const Bio = () => {
       ) : (
         <button
           className="flex-center h-7 w-7 rounded-full"
-          onClick={updateContact}
+          onClick={updateNewBio}
         >
           <FaCheck />
         </button>
