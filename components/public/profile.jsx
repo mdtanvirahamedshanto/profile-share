@@ -37,10 +37,10 @@ const Profile = ({username}) => {
     
       if(loading) return <LoadingIcon />
   return (
-    <div>
-         <span className='text-xl sm:text-3xl my-3 italic'>{user?.name}</span>
+    <div className='flex flex-col justify-center items-center mx-5 '>
+         <span className='text-xl sm:text-3xl my-3 italic text-blue-400'>{user?.name}</span>
                     {/* bio */}
-                    <div>{user?.bio}</div>
+                    <div className='items-center text-justify text-emerald-300'>{user?.bio}</div>
     </div>
   )
 }

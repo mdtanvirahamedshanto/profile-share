@@ -3,6 +3,8 @@
 import { deleteService, findUser } from "@/actions";
 import CopyButton from "@/components/CopyButton";
 import HomePage from "@/components/HomePage";
+import Navbar from "@/components/Navbar";
+import QrCode from "@/components/QrScanner";
 import AddService from "@/components/update/AddService";
 import Bio from "@/components/update/Bio";
 import UpdateContact from "@/components/update/UpdateContact";
@@ -33,22 +35,32 @@ export default function Home() {
   const handleDelete = async (item) => {
     const service = item
     const data = await deleteService(id, service)
-    if (data) {
-      toast.info("Service Deleted! ")
-    }
+   
+      toast.info("Service Deleted! Please Reroad")
+    
   }
   const username = user?.username
   const shareLink = `https://profileshare.vercel.app/link/${username}`
+  const viewLink = shareLink.length > 45 ? shareLink.slice(0,45).concat("...") : shareLink
   if (!auth) return <HomePage />
   return (
 
     <div className="h-full">
+      <Navbar />
 
-      <div className="flex text-primary justify-center flex-wrap">
-        Your share link : <span className="mx-2 text-gray-300">{shareLink}
+      <div className="flex text-primary justify-center flex-col items-center sm:flex-row">
+        Your share link : 
+        <span className="flex items-center justify-center">
+
+        <span className="mx-2  text-gray-300">{viewLink}
         </span>
         <CopyButton textToCopy={shareLink} />
+        </span>
       </div>
+        
+      {/* <div className="p-8">
+        <QrCode value={shareLink}  className="p-8"/>
+      </div> */}
 
       <div className="flex flex-col justify-center items-center">
         <p>Edit Your Details <span>{auth?.name}</span> </p>
@@ -63,8 +75,8 @@ export default function Home() {
             <UserName />
 
           </div>
-          <div className="flex items-center">
-            <div className="text-green-500 ">Bio:
+          <div className="flex items-center flex-col justify-center sm:flex-row">
+            <div className="text-green-500 ml-1">Bio:
             </div>
             <Bio />
           </div>

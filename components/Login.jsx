@@ -42,7 +42,7 @@ const Login = () => {
       toast.error("Something Went Wrong! ")
 
       setLoading(false);
-      setError(err.message);
+      console.log(err.message);
     }
   }
   return (

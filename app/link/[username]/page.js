@@ -10,11 +10,11 @@ export const metadata ={
 
 const page = ({ params: { username } }) => {
     return (
-        <div className=' w-full h-screen'>
+        <div className=' w-full h-screen '>
             <div className='flex flex-col justify-center items-center'>
                 {/* welcome text  */}
                 <div className='text-2xl flex flex-col mt-7 mb-7 items-center sm:text-5xl font-medium'>
-                    <span className='text-2xl my-2 sm:text-5xl font-semibold'>
+                    <span className='text-4xl my-2 sm:text-5xl font-bold text-red-600'>
 
                     Welcome To My Profile
                     </span>

@@ -16,7 +16,7 @@ const id = auth?._id
         await addService(id, service );
         setEditMode(false);
         setService("")
-        toast.success("service added successfully");
+        toast.success("service added successfully! Please reload");
       } catch (error) {
         console.log(error);
       }

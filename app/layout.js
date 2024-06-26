@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <>
           <div className="w-full h-full sm:h-screen bg-[#004643] text-white ">
-          <Navbar />
+
           <ToastProvider>
             <UserProvider>
 

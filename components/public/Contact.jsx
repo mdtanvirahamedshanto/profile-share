@@ -6,9 +6,9 @@ import { useUser } from '@/hooks/useUser'
 const Contact = () => {
 const {user} = useUser()
     return (
-        <div className='flex flex-col justify-center mb-5 items-center'>
+        <div className='flex flex-col justify-center mb-5 items-center w-full'>
             <div className='text-4xl text-primary mb-1 font-bold'>Contact:</div>
-            <div>
+            <div className='flex flex-col justify-center ml-6 text-green-500 font-semibold'>
                 {
                     user?.contact?.phone && <div className='text-xl hover:scale-105'>Phone: {user?.contact?.phone}</div>
                 }

@@ -27,11 +27,11 @@ const Bio = () => {
       setEditMode(true);
     };
   return (
-    <div className='flex'>
+    <div className='flex items-center justify-center'>
   
-    <div className="flex-1">
+    <div className="flex items-center justify-center">
         {!editMode ? (
-          <p className="leading-[188%] mx-2 text-pink-300 sm:text-lg">
+          <p className="leading-[188%] flex items-center ml-2 text-pink-300 sm:text-lg">
             {bio}
           </p>
         ) : (
@@ -39,7 +39,7 @@ const Bio = () => {
             className='p-2 mx-2 className="leading-[188%] bg-[#167770] text-white lg:text-lg rounded-md'
             value={bio}
             rows={1}
-            cols={18}
+            cols={28}
             placeholder="Enter your bio"
             onChange={(e) => setBio(e.target.value)}
           />
@@ -48,14 +48,14 @@ const Bio = () => {
 
       {!editMode ? (
         <button
-          className="flex-center h-7 w-7 rounded-full"
+          className="flex-center mr-3 h-7 w-7 rounded-full"
           onClick={handleEdit}
         >
           <FaEdit />
         </button>
       ) : (
         <button
-          className="flex-center h-7 w-7 rounded-full"
+          className="flex-center h-7 w-7 m-3 rounded-full"
           onClick={updateNewBio}
         >
           <FaCheck />
