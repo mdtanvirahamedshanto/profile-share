@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 export default function Home() {
   const { auth, setAuth } = useAuth();
   const [user, setUser] = useState('')
+  const [show, setShow ] = useState(false);
 
   // console.log(auth)
 
@@ -58,9 +59,15 @@ export default function Home() {
         </span>
       </div>
         
-      {/* <div className="p-8">
-        <QrCode value={shareLink}  className="p-8"/>
-      </div> */}
+      <div className="flex gap-4 my-4 justify-center items-center">
+        <button className="px-2 py-1 rounded-lg hover:text-gray-950 bg-blue-700 hover:bg-blue-400 text-gray-900" onClick={()=> setShow(!show)}>{show ? "Hide QrCode": "Show QrCode"}</button>
+        {
+          show && (
+            <div>  <QrCode value={shareLink} /> </div>
+          )
+        }
+       
+      </div>
 
       <div className="flex flex-col justify-center items-center">
         <p>Edit Your Details <span>{auth?.name}</span> </p>
