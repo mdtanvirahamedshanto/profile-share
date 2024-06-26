@@ -39,6 +39,8 @@ const Login = () => {
         setError("Please provide a valid login credential");
       }
     } catch (err) {
+      toast.error("Something Went Wrong! ")
+
       setLoading(false);
       setError(err.message);
     }

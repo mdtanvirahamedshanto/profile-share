@@ -44,7 +44,7 @@ export default function Home() {
 
     <div className="h-full">
 
-      <div className="flex text-primary justify-center">
+      <div className="flex text-primary justify-center flex-wrap">
         Your share link : <span className="mx-2 text-gray-300">{shareLink}
         </span>
         <CopyButton textToCopy={shareLink} />
