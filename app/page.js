@@ -42,7 +42,7 @@ export default function Home() {
   }
   const username = user?.username
   const shareLink = `https://profileshare.vercel.app/link/${username}`
-  const viewLink = shareLink.length > 45 ? shareLink.slice(0,45).concat("...") : shareLink
+  const viewLink = shareLink.length > 40 ? shareLink.slice(0,40).concat("...") : shareLink
   if (!auth) return <HomePage />
   return (
 
@@ -53,7 +53,9 @@ export default function Home() {
         Your share link : 
         <span className="flex items-center justify-center">
 
-        <span className="mx-2  text-gray-300">{viewLink}
+        <span className="mx-2 block sm:hidden  text-gray-300">{viewLink}
+        </span>
+        <span className="mx-2 hidden sm:block text-gray-300">{shareLink}
         </span>
         <CopyButton textToCopy={shareLink} />
         </span>
